@@ -199,7 +199,8 @@ function checkBallAtRingEdge() {
 		reflectV.sub(ringCenter);
 
     // Add a degree of randomness to the reflection angle before relecting the ball
-    reflectV.rotate(PI / random(-64, 32));
+    reflectV.rotate(PI / random(8, 16)); // small, random clockwise skew
+    reflectV.rotate(PI / random(-16, -8)); // small, random conter-clockwise skew
     ballV.reflect(reflectV);
 	}
 }
