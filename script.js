@@ -28,6 +28,18 @@ let score = 2;
 // Sound
 let monoSynth;
 
+let img;
+function ok() {
+	print("ok");
+}
+function nok() {
+	pring("nok");
+}
+
+function preload() {
+	img = loadImage("https://nigms.nih.gov/education/Inside-Life-Science/PublishingImages/lung-fish.jpg", ok, nok);  
+}
+
 function setup() {
   // Sound
   monoSynth = new p5.MonoSynth();
@@ -63,16 +75,7 @@ function setup() {
 	targetColor = color(200, 0, 0);
 	targetHitColor = color(0, 0, 200);
 	
-	img = loadImage("https://nigms.nih.gov/education/Inside-Life-Science/PublishingImages/lung-fish.jpg", ok, nok);
 	background(img, windowWidth, windowHeight);
-	//image(img, 20, 40, 100, 100);
-}
-let img;
-function ok() {
-	print("ok");
-}
-function nok() {
-	pring("nok");
 }
 
 function keyPressed() {
@@ -90,12 +93,8 @@ function keyPressed() {
 	}
 	//print('keycode ' + keyCode);
 }
-let bg = false;
+
 function draw() {
-	if (!bg)
-		background(img);
-	else bg = true;
-		//image(img, mouseX, mouseY, 100, 100)
 	drawRing();
 	updatePaddle();
 	drawTarget();
