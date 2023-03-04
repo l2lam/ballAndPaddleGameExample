@@ -181,8 +181,9 @@ function checkBallHitPaddle() {
 			//print("ballV, productV", ballV, productV);
 			if (productV.x < 0 || productV.y < 0) {
 				ballV.reflect(reflectV);
+        drawArrow(ballPos, reflectV, 'yellow');
         ballV.mult(1.2);
-				print("hit paddle!");
+				// print("hit paddle!");
         playBounceSound();
 				//frameRate(5);
 			}
@@ -200,6 +201,7 @@ function checkBallAtRingEdge() {
     // Add a degree of randomness to the reflection angle before relecting the ball
     reflectV.rotate(PI / random(8, 16)); // small, random clockwise skew
     reflectV.rotate(PI / random(-16, -8)); // small, random conter-clockwise skew
+    drawArrow(ballPos, reflectV, 'yellow');
     ballV.reflect(reflectV);
 	}
 }
@@ -216,6 +218,7 @@ function drawBall() {
 	strokeWeight(3);
 	fill(ballFillColor);
 	circle(ballPos.x, ballPos.y, ballRadius * 2);
+  drawArrow(ballPos, ballV, 'blue');
 }
 
 function drawPaddle() {
@@ -251,4 +254,18 @@ function playBounceSound() {
 function playTargetHitSound() {
   let v = (ballV.mag() * 3) / ringRadius;
   monoSynth.play('C4', v, 0, 1/8);
+}
+
+function drawArrow(base, vec, myColor) {
+  push();
+  stroke(myColor);
+  strokeWeight(3);
+  fill(myColor);
+  translate(base.x, base.y);
+  line(0, 0, vec.x, vec.y);
+  rotate(vec.heading());
+  let arrowSize = 7;
+  translate(vec.mag() - arrowSize, 0);
+  triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
+  pop();
 }
